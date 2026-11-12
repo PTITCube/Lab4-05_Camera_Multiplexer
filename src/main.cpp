@@ -15,23 +15,26 @@
  */
 
 #include <Arduino.h>
+
 #include <PTITCube.h>
+
+PTIT_CDH cdh;
 
 // Khởi tạo các phân hệ
 PTIT_Camera camera;
 PTIT_GPS gps;
 
 void setup() {
-    Serial.begin(115200);
+    cdh.begin(115200);
     delay(2000);
     
-    Serial.println("\n--- TEST CHUYỂN MẠCH CAMERA & GPS ---");
-    Serial.println("ESP32-CAM giao tiep qua UART2 (GPIO14-TX, GPIO15-RX)");
-    Serial.println("OBC ket noi qua UART2 (GPIO16-RX, GPIO17-TX) + MUX");
+    cdh.println("\n--- TEST CHUYỂN MẠCH CAMERA & GPS ---");
+    cdh.println("ESP32-CAM giao tiep qua UART2 (GPIO14-TX, GPIO15-RX)");
+    cdh.println("OBC ket noi qua UART2 (GPIO16-RX, GPIO17-TX) + MUX");
 
     // Khởi tạo Camera (chân select GPS = 12, Camera = 14)
     if (!camera.init(12, 14)) {
-        Serial.println("[Canh bao] Camera init co loi (Co the chua gan the nho).");
+        cdh.println("[Canh bao] Camera init co loi (Co the chua gan the nho).");
     }
 
     // Khởi tạo GPS (cùng chân MUX)
@@ -39,42 +42,42 @@ void setup() {
 }
 
 void loop() {
-    Serial.println("\n>>> Che do: UU TIEN CAMERA");
+    cdh.println("\n>>> Che do: UU TIEN CAMERA");
     camera.selectCamera(); // Bật kênh giao tiếp cho Camera, tắt GPS
     
     // Đợi một chút để mạch chuyển đổi ổn định
     delay(100); 
 
     if (camera.isReady()) {
-        Serial.println("Chup anh bang Camera...");
+        cdh.println("Chup anh bang Camera...");
         camera.captureToFile("/photos/multiplexer_test.jpg");
     } else {
-        Serial.println("Camera khong san sang.");
+        cdh.println("Camera khong san sang.");
     }
     
     delay(5000);
 
-    Serial.println("\n>>> Che do: UU TIEN GPS");
+    cdh.println("\n>>> Che do: UU TIEN GPS");
     gps.selectGPS(); // Bật kênh giao tiếp cho GPS, tắt Camera
     
     // Đợi một chút để GPS có thể gửi dữ liệu
     delay(1000);
 
     // Đọc dữ liệu từ GPS trong 5 giây
-    Serial.println("Dang doc du lieu GPS...");
+    cdh.println("Dang doc du lieu GPS...");
     unsigned long startTime = millis();
     while (millis() - startTime < 5000) {
         gps.update();
         if (gps.hasFix()) {
-            Serial.print("Lat: "); Serial.print(gps.getLatitude(), 6);
-            Serial.print(" - Lng: "); Serial.println(gps.getLongitude(), 6);
+            cdh.print("Lat: "); cdh.print(gps.getLatitude(), 6);
+            cdh.print(" - Lng: "); cdh.println(gps.getLongitude(), 6);
             break; // Đã có vị trí, thoát vòng lặp
         }
         delay(10);
     }
     
     if (!gps.hasFix()) {
-        Serial.println("GPS chua chot duoc vi tri (No Fix).");
+        cdh.println("GPS chua chot duoc vi tri (No Fix).");
     }
 
     // Đợi một lát trước vòng lặp tiếp theo
