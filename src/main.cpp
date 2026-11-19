@@ -22,7 +22,7 @@ void loop() {
     delay(100);
 
     if (camera.isReady()) {
-        cdh.println("[MUX] Kênh Camera: Chụp ảnh...");
+        cdh.println("MUX: Kênh Camera: Chụp ảnh...");
         camera.captureToFile("/photos/multiplexer_test.jpg");
     }
     delay(3000);
@@ -31,12 +31,12 @@ void loop() {
     gps.selectGPS();
     delay(500);
 
-    cdh.println("[MUX] Kênh GPS: Đang cập nhật...");
+    cdh.println("MUX: Kênh GPS: Đang cập nhật...");
     unsigned long startTime = millis();
     while (millis() - startTime < 3000) {
         gps.update();
         if (gps.hasFix()) {
-            cdh.printf("[GPS] Lat: %.6f, Lng: %.6f\n", gps.getLatitude(), gps.getLongitude());
+            cdh.printf("GPS: Lat: %.6f, Lng: %.6f\n", gps.getLatitude(), gps.getLongitude());
             break;
         }
         delay(10);
