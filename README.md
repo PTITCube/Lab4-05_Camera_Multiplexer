@@ -1,4 +1,4 @@
-# Lab 4-06: Đa Hợp Cụm Camera Viễn Thám (Camera Multiplexer)
+# Lab 4-05: Chuyển Mạch Camera & GPS Qua IC 74HC4066 (Camera Multiplexer)
 
 > **Phân hệ:** Sensor & Payload Chuyên Sâu  
 > **Thư viện yêu cầu:** `PTITCube Library v1.1.0`  
@@ -41,7 +41,7 @@ Sử dụng **PlatformIO CLI** hoặc giao diện **VSCode / PlatformIO IDE**:
 
 ```bash
 # 1. Di chuyển vào thư mục dự án
-cd Lab4-06_Camera_Multiplexer
+cd Lab4-05_Camera_Multiplexer
 
 # 2. Biên dịch mã nguồn
 pio run

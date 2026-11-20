@@ -1,5 +1,5 @@
 /**
- * VÍ DỤ 4-06: CHUYỂN MẠCH CAMERA & GPS QUA MULTIPLEXER 74HC4066
+ * VÍ DỤ 4-05: CHUYỂN MẠCH CAMERA & GPS QUA MULTIPLEXER 74HC4066
  */
 #include <Arduino.h>
 #include <PTITCube.h>
