@@ -11,7 +11,7 @@ PTIT_GPS gps;
 int photoCount = 0;
 
 void setup() {
-    cdh.begin(115200);
+    cdh.begin();
 
     // Kích hoạt hạ áp cấp nguồn camera, GPS và ngoại vi qua thư viện EPS
     eps.setBuckState(true);
