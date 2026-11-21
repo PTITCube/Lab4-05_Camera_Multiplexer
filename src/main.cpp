@@ -16,8 +16,8 @@ void setup() {
     // Kích hoạt hạ áp cấp nguồn camera, GPS và ngoại vi qua thư viện EPS
     eps.setBuckState(true);
 
-    camera.init(12, 14);
-    gps.init(12, 14);
+    camera.init();
+    gps.init();
     gps.selectGPS();
 }
 
