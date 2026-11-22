@@ -29,9 +29,7 @@ void loop() {
             delay(200);
 
             String path = "/photos/mux_" + String(photoCount++) + ".jpg";
-            if (camera.captureToFile(path.c_str())) {
-                cdh.println("Camera: Da luu " + path);
-            } else {
+            if (!camera.captureToFile(path.c_str())) {
                 cdh.println("Camera: Chup that bai.");
             }
 
